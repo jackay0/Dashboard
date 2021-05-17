@@ -6,14 +6,16 @@ import javafx.stage.Stage;
 import javafx.scene.chart.*;
 import javafx.scene.Group;
 import java.util.Scanner;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
+
 public class graph extends Application {
 	
 	
 	
 	private double total;
-    
-    
-
     private String d;
     private int e;
     
@@ -26,6 +28,8 @@ public class graph extends Application {
         stage.setTitle("Dashboard");
         stage.setWidth(500);
         stage.setHeight(500);
+        
+        
         
         
         Scanner sc = new Scanner(System.in);
@@ -64,9 +68,11 @@ public class graph extends Application {
         }
        
        
+        
+  
+        //Pie Chart
         final PieChart chart = new PieChart(pieChartData);
         chart.setTitle("Dashboard");
-
         ((Group) scene.getRoot()).getChildren().add(chart);
         stage.setScene(scene);
         stage.show();
@@ -76,8 +82,5 @@ public class graph extends Application {
         launch(args);
     }
     
-    public static void assemble() {
-    	
-    	
-    }
+    
 }
