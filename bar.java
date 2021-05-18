@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 import javafx.application.Application;
@@ -13,10 +14,30 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.NumberFormat;
+import java.text.ParseException;
 
-public class bar extends Application {
+public class bar extends Application  {
+	 File file = new File("/C://Users//0001081009//workspace//Dashboard//src//file.dat");
+ 	String[] names = new String[10];
+ 	Scanner ssee = new Scanner(file);
 	
-    
+	
+	public bar() throws FileNotFoundException
+	{
+		int place = 0;
+		while(ssee.hasNextLine()) 
+    	{	
+			String s = ssee.nextLine();
+			names[place] = s;
+			
+			place++;
+    	}
+		System.out.print(Arrays.toString(names));
+	}
+	
+	
+	
     @Override public void start(Stage stage) {
         stage.setTitle("T&T Subsea");
         final CategoryAxis xAxis = new CategoryAxis();
@@ -30,20 +51,35 @@ public class bar extends Application {
         Scanner sc = new Scanner(System.in);
         
         
-        System.out.println("");
-        sc.next();
+        for(int i=0;i<names.length;i++) {
+        	try {
+				series.getData().add(new XYChart.Data(((Number)NumberFormat.getInstance().parse(names[i])).intValue(),names[i]));
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        	
+        }
         
         
         Scene scene  = new Scene(bc,800,600);
         bc.getData().addAll(series);
         stage.setScene(scene);
         stage.show();
+        
+        
+       
     }
  
+    
+    
     public static void main(String[] args) {
         launch(args);
     }
 
+    
+    
+    
     public void modifyFile(String oldString, String newString) 
     {
         
@@ -58,7 +94,7 @@ public class bar extends Application {
        
         try
         {
-            reader = new BufferedReader(new FileReader(save));
+            reader = new BufferedReader(new FileReader(file));
              
             //Reading all the lines of input text file into oldContent
              
@@ -78,7 +114,7 @@ public class bar extends Application {
             
             //Rewriting the input text file with newContent
              
-            writer = new FileWriter(save);
+            writer = new FileWriter(file);
             writer.write(newContent);
             writer.close();
            
@@ -89,5 +125,16 @@ public class bar extends Application {
             e.printStackTrace();
         }
     }
-
+    
+    
+    
+    public String current(int i ) {
+    	
+    	String current = names[i];
+    	
+    	
+    	
+    	return current;
+    }
+    
 }
