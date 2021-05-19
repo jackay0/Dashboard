@@ -53,7 +53,7 @@ public class bar extends Application  {
         
         for(int i=0;i<names.length;i++) {
         	try {
-				series.getData().add(new XYChart.Data(((Number)NumberFormat.getInstance().parse(names[i])).intValue(),names[i]));
+				series.getData().add(new XYChart.Data(names[i],((Number)NumberFormat.getInstance().parse(names[i])).intValue()));
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
